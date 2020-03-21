@@ -1,27 +1,23 @@
-package tuersteher.controller;
+package tuersteher.model;
 
 /**
  * @author Thure Nebendahl on 21.03.20
  */
 public class QuestionnaireForm {
-    String firstname;
-    String lastname;
-    String email;
-    String street;
-    String postcode;
-    String city;
-    String country;
-
-    public QuestionnaireForm(){
-
-    }
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String street;
+    private String postcode;
+    private String city;
+    private String country;
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
     public String getFirstname() {
-        return "";
+        return this.firstname;
     }
 
     public void setLastname(String lastname) {
@@ -29,7 +25,7 @@ public class QuestionnaireForm {
     }
 
     public String getLastname() {
-        return "";
+        return this.lastname;
     }
 
     public void setEmail(String email) {
@@ -37,7 +33,7 @@ public class QuestionnaireForm {
     }
 
     public String getEmail() {
-        return "";
+        return this.email;
     }
 
     public void setStreet(String street) {
@@ -45,7 +41,7 @@ public class QuestionnaireForm {
     }
 
     public String getStreet() {
-        return "";
+        return this.street;
     }
 
     public void setPostcode(String postcode) {
@@ -53,7 +49,7 @@ public class QuestionnaireForm {
     }
 
     public String getPostcode() {
-        return "";
+        return this.postcode;
     }
 
     public void setCity(String city) {
@@ -61,7 +57,7 @@ public class QuestionnaireForm {
     }
 
     public String getCity() {
-        return "";
+        return this.city;
     }
 
     public void setCountry(String country) {
@@ -69,7 +65,7 @@ public class QuestionnaireForm {
     }
 
     public String getCountry() {
-        return "";
+        return this.country;
     }
 
 }
