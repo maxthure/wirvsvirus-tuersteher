@@ -22,13 +22,13 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/questionnaire")
-    String register(Model model, QuestionnaireForm form) {
+    String questionnaireGet(Model model, QuestionnaireForm form) {
         model.addAttribute("form", form);
         return "questionnaire";
     }
 
     @PostMapping("/questionnaire")
-    String registerNew(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
+    String questionnairePost(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
         if (result.hasErrors()) {
             return "register";
         }
@@ -36,4 +36,5 @@ public class QuestionnaireController {
 
         return "redirect:/";
     }
+    
 }
