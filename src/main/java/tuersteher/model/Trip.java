@@ -5,7 +5,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Robert Rabe on 21.03.20.
@@ -22,8 +21,8 @@ public class Trip {
 
     @NotNull
     @NotEmpty
-    @OneToMany(targetEntity = PassengerTrip.class, fetch = FetchType.EAGER)
-    private List<PassengerTrip> passengers;
+    @OneToMany(targetEntity = Passenger.class, fetch = FetchType.EAGER)
+    private List<Passenger> passengers;
 
     private Instant date = Instant.now();
 
@@ -53,11 +52,11 @@ public class Trip {
         this.car = car;
     }
 
-    public List<PassengerTrip> getPassengers() {
+    public List<Passenger> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(List<PassengerTrip> passengers) {
+    public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }
 
