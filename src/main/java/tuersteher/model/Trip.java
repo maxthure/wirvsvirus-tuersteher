@@ -3,6 +3,7 @@ package tuersteher.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class Trip {
     @NotEmpty
     @OneToMany(targetEntity = Passenger.class, fetch = FetchType.EAGER)
     private List<Passenger> passengers;
+
+    private Instant date = Instant.now();
 
     public boolean isOk() {
         return isOk;
@@ -55,5 +58,13 @@ public class Trip {
 
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
     }
 }

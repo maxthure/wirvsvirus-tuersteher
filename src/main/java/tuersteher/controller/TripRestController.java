@@ -1,14 +1,10 @@
 package tuersteher.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tuersteher.model.Trip;
 import tuersteher.service.TripService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -31,5 +27,10 @@ public class TripRestController {
     @PostMapping("/trip")
     public Trip createTrip(@RequestBody @Valid Trip trip) {
         return this.tripService.createTrip(trip);
+    }
+
+    @GetMapping("/trip/car/{id}")
+    public Trip getTripByCar(@PathVariable String id) {
+        return this.tripService.getTripByCar(id);
     }
 }

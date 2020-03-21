@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import tuersteher.model.Car;
 import tuersteher.model.Trip;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,5 @@ import java.util.Optional;
 public interface TripRepository extends CrudRepository<Trip, Long> {
     Optional<Trip> getTripById(Long id);
     List<Trip> getTripsByCar(Car car);
+    Optional<Trip> getTripByCarOrderByDateDesc(Car car);
 }

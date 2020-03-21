@@ -9,8 +9,10 @@ import tuersteher.repository.CarRepository;
 import tuersteher.repository.PassengerRepository;
 import tuersteher.repository.TripRepository;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -29,6 +31,12 @@ public class TripService {
         this.tripRepository = tripRepository;
         this.carRepository = carRepository;
         this.passengerRepository = passengerRepository;
+    }
+
+    public Trip getTripByCar(String id) {
+        Optional<Car> car = carRepository.findById(id);
+        Optional<Trip> foundTrip = car.flatMap(tripRepository::getTripByCarOrderByDateDesc);
+        return foundTrip.orElseThrow(() -> new RuntimeException("Could not find trip!"));
     }
 
     public List<Trip> getAllTrips() {
