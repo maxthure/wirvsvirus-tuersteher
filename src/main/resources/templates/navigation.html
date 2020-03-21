@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -11,11 +12,13 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
 </head>
 <body>
-<div class="ui container">
-    <header>
-        <h1 th:text="#{index.title}">!!!ERROR!!!</h1>
-    </header>
-    <nav th:include="navigation :: navigation"></nav>
-</div>
+<nav th:fragment="navigation">
+    <p></p>
+    <div class="ui menu">
+        <a class="item" href="index.html" th:href="@{/}" th:text="#{index.title}">!!!ERROR!!!</a>
+        <a class="item" href="questionnaire.html" th:href="@{/questionnaire}" th:text="#{questionnaire.title}">!!!ERROR!!!</a>
+    </div>
+    <br/>
+</nav>
 </body>
 </html>
