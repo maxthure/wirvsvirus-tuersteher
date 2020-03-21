@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -102,5 +103,14 @@ public class Trip {
 
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
+    }
+
+    public void addPassenger(Passenger passenger){
+        PassengerTrip pt = new PassengerTrip();
+        pt.setPassenger(passenger);
+        if(passengers == null){
+            passengers = new ArrayList<>();
+        }
+        passengers.add(pt);
     }
 }
