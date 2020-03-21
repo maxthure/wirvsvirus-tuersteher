@@ -3,7 +3,7 @@ package tuersteher.model;
 /**
  * @author Thure Nebendahl on 21.03.20
  */
-public class QuestionnaireForm {
+public class Questionnaire1Form {
     private String firstname;
     private String lastname;
     private String email;

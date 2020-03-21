@@ -2,7 +2,7 @@ package tuersteher.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tuersteher.model.QuestionnaireForm;
+import tuersteher.model.Questionnaire1Form;
 
 /**
  * @author Thure Nebendahl on 21.03.20
@@ -11,7 +11,7 @@ import tuersteher.model.QuestionnaireForm;
 @Service
 public class QuestionnaireService {
 
-    public void processQuestionnaire(QuestionnaireForm form){
+    public void processQuestionnaire(Questionnaire1Form form){
 
     }
 }
