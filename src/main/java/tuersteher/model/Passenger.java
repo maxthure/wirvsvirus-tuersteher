@@ -25,12 +25,14 @@ public class Passenger {
     @NotEmpty
     private String lastName;
     @NotNull
-    private Instant birthday;
+    //private Instant birthday;
+    private String birthday;
     @NotNull
     @NotEmpty
     private String passNumber;
     @NotNull
-    private Instant passExpirationDate;
+    //private Instant passExpirationDate;
+    private String passExpirationDate;
     @NotNull
     @NotEmpty
     private String streetAndNr;
@@ -73,11 +75,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public Instant getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Instant birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -89,11 +91,11 @@ public class Passenger {
         this.passNumber = passNumber;
     }
 
-    public Instant getPassExpirationDate() {
+    public String getPassExpirationDate() {
         return passExpirationDate;
     }
 
-    public void setPassExpirationDate(Instant passExpirationDate) {
+    public void setPassExpirationDate(String passExpirationDate) {
         this.passExpirationDate = passExpirationDate;
     }
 

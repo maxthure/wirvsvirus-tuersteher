@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+
+    <script>
+        $(document).ready(function() {
+            $('.ui.dropdown').dropdown();
+            $('#postcode').keyup(function() {
+                if ($(this).val().length > 4) {
+                    var ort = $('#city');
+                    $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country='+$('#country').val()+'&callback=?', {postalcode: this.value }, function(response) {
+                        if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                            ort.val(response.postalcodes[0].placeName);
+                        }
+                    })
+                } else {
+                    $('#city').val('');
+                }
+            });
+        });
+    </script>
+
+    <title th:text="#{questionnaire.title}">!!!ERROR!!!</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{questionnaire.title}">!!!ERROR!!!</h1>
+    </header>
+
+    <nav th:include="navigation :: navigation"></nav>
+
+    <form method="post" role="form" class="ui form" id="form" autocomplete="off" th:action="@{/questionnaire(ph=${this})}" th:object="${form}">
+
+        <h2 class="ui dividing header"></h2>
+
+        <div th:each="passenger, itemStat : *{passengerList}">
+            <h3 th:text="#{questionnaire.passenger_information}">!!!ERROR!!!</h3>
+
+            <div class="required field">
+                <label for="firstname" th:text="#{questionnaire.firstname}">!!!ERROR!!!</label>
+                <input id="firstname" name="firstname" value="" th:field="*{passengerList[__${itemStat.index}__].firstName}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].firstName')}" th:errors="*{passengerList[__${itemStat.index}__].firstName}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="lastname" th:text="#{questionnaire.lastname}">!!!ERROR!!!</label>
+                <input id="lastname" name="lastname" th:field="*{passengerList[__${itemStat.index}__].lastName}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].lastName')}" th:errors="*{passengerList[__${itemStat.index}__].lastName}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="date_of_birth" th:text="#{questionnaire.date_of_birth}">!!!ERROR!!!</label>
+                <input id="date_of_birth" name="lastname" th:field="*{passengerList[__${itemStat.index}__].birthday}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].birthday')}" th:errors="*{passengerList[__${itemStat.index}__].birthday}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="pass_nr" th:text="#{questionnaire.pass_nr}">!!!ERROR!!!</label>
+                <input id="pass_nr" name="pass_nr" th:field="*{passengerList[__${itemStat.index}__].passNumber}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].passNumber')}" th:errors="*{passengerList[__${itemStat.index}__].passNumber}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="pass_expiry_date" th:text="#{questionnaire.pass_expiry_date}">!!!ERROR!!!</label>
+                <input id="pass_expiry_date" name="pass_expiry_date" th:field="*{passengerList[__${itemStat.index}__].passExpirationDate}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].passExpirationDate')}" th:errors="*{passengerList[__${itemStat.index}__].passExpirationDate}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="street" th:text="#{questionnaire.street}">!!!ERROR!!!</label>
+                <input id="street" name="street" th:field="*{passengerList[__${itemStat.index}__].streetAndNr}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].streetAndNr')}" th:errors="*{passengerList[__${itemStat.index}__].streetAndNr}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="postcode" th:text="#{questionnaire.postcode}">!!!ERROR!!!</label>
+                <input id="postcode" name="postcode" value="" th:field="*{passengerList[__${itemStat.index}__].areaCode}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].areaCode')}" th:errors="*{passengerList[__${itemStat.index}__].areaCode}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="city" th:text="#{questionnaire.city}">!!!ERROR!!!</label>
+                <input id="city" name="city" value="" th:field="*{passengerList[__${itemStat.index}__].city}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].city')}" th:errors="*{passengerList[__${itemStat.index}__].city}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="country" th:text="#{questionnaire.country}">!!!ERROR!!!</label>
+                <div class="ui fluid search selection dropdown">
+                    <input type="hidden" id="country" name="country" value="de" th:field="*{passengerList[__${itemStat.index}__].country}" th:errorclass="fieldError" required>
+                    <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].country')}" th:errors="*{passengerList[__${itemStat.index}__].country}">
+                        <p>Country must not be empty.</p>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="default text" th:text="#{questionnaire.country}">!!!ERROR!!!</div>
+                    <div class="menu">
+                        <div class="item" data-value="au"><i class="au flag"></i><span th:text="#{country.au}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="be"><i class="be flag"></i><span th:text="#{country.be}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="bg"><i class="bg flag"></i><span th:text="#{country.bg}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="cn"><i class="cn flag"></i><span th:text="#{country.cn}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="dk"><i class="dk flag"></i><span th:text="#{country.dk}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="de"><i class="de flag"></i><span th:text="#{country.de}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="gb"><i class="gb flag"></i><span th:text="#{country.gb}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ee"><i class="ee flag"></i><span th:text="#{country.ee}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="fi"><i class="fi flag"></i><span th:text="#{country.fi}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="fr"><i class="fr flag"></i><span th:text="#{country.fr}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="gr"><i class="gr flag"></i><span th:text="#{country.gr}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="hk"><i class="hk flag"></i><span th:text="#{country.hk}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ie"><i class="ie flag"></i><span th:text="#{country.ie}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="is"><i class="is flag"></i><span th:text="#{country.is}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="it"><i class="it flag"></i><span th:text="#{country.it}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="jp"><i class="jp flag"></i><span th:text="#{country.jp}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ca"><i class="ca flag"></i><span th:text="#{country.ca}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="hr"><i class="hr flag"></i><span th:text="#{country.hr}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="cu"><i class="cu flag"></i><span th:text="#{country.cu}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="lv"><i class="lv flag"></i><span th:text="#{country.lv}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="li"><i class="li flag"></i><span th:text="#{country.li}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="lt"><i class="lt flag"></i><span th:text="#{country.lt}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="lu"><i class="lu flag"></i><span th:text="#{country.lu}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="mt"><i class="mt flag"></i><span th:text="#{country.mt}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="mc"><i class="mc flag"></i><span th:text="#{country.mc}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="nl"><i class="nl flag"></i><span th:text="#{country.nl}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="no"><i class="no flag"></i><span th:text="#{country.no}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="at"><i class="at flag"></i><span th:text="#{country.at}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="pl"><i class="pl flag"></i><span th:text="#{country.pl}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="pt"><i class="pt flag"></i><span th:text="#{country.pt}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="qa"><i class="qa flag"></i><span th:text="#{country.qa}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ro"><i class="ro flag"></i><span th:text="#{country.ro}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ru"><i class="ru flag"></i><span th:text="#{country.ru}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="se"><i class="se flag"></i><span th:text="#{country.se}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ch"><i class="ch flag"></i><span th:text="#{country.ch}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="sg"><i class="sg flag"></i><span th:text="#{country.sg}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="sk"><i class="sk flag"></i><span th:text="#{country.sk}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="si"><i class="si flag"></i><span th:text="#{country.si}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="es"><i class="es flag"></i><span th:text="#{country.es}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="za"><i class="za flag"></i><span th:text="#{country.za}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="th"><i class="th flag"></i><span th:text="#{country.th}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="cz"><i class="cz flag"></i><span th:text="#{country.cz}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="tr"><i class="tr flag"></i><span th:text="#{country.tr}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="ua"><i class="ua flag"></i><span th:text="#{country.ua}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="hu"><i class="hu flag"></i><span th:text="#{country.hu}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="us"><i class="us flag"></i><span th:text="#{country.us}">!!!ERROR!!!</span></div>
+                        <div class="item" data-value="cy"><i class="cy flag"></i><span th:text="#{country.cy}">!!!ERROR!!!</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="email" th:text="#{questionnaire.email}">!!!ERROR!!!</label>
+                <input id="email" name="email" th:field="*{passengerList[__${itemStat.index}__].email}" th:errorclass="fieldError" type="email" required="required" pattern="([\w\.]+)@([\w\.]+)\.(\w+)" /><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].email')}" th:errors="*{passengerList[__${itemStat.index}__].email}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+
+            <div class="required field">
+                <label for="mobile" th:text="#{questionnaire.mobile}">!!!ERROR!!!</label>
+                <input id="mobile" name="email" th:field="*{passengerList[__${itemStat.index}__].mobileNumber}" th:errorclass="fieldError" type="text"/><br/>
+                <div class="ui negative message" th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].mobileNumber')}" th:errors="*{passengerList[__${itemStat.index}__].mobileNumber}">
+                    <p>!!!ERROR!!!</p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+
+        <button type="submit" class="ui button" th:text="#{questionnaire.send}">!!!ERROR!!!</button>
+    </form>
+</div>
+</body>
+</html>
