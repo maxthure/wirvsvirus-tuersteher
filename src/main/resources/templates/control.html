@@ -47,6 +47,9 @@
             <div class="content"
                  th:text="${'Registration Date: ' + #temporals.format(form.getTrip().getDate(), 'yyyy-MM-dd')}"></div>
         </h4>
+        <div class="ui">
+
+        </div>
         <div class="ui divider"></div>
         <div class="ui three column grid">
             <div class="row">
@@ -67,21 +70,42 @@
         <div class="ui cards">
             <div class="ui link card" th:each="passenger: ${form.getTrip().getPassengers()}">
                 <div class="content">
-                    <div class="header" th:text="${passenger.getPassenger().getName()}"></div>
-                    <div class="meta" th:text="${'Passport ID: '}"></div>
+                    <div class="header"
+                         th:text="${passenger.getPassenger().getFirstName() + ' ' + passenger.getPassenger().getLastName()}"></div>
+                    <div class="meta"
+                         th:text="${'Passport ID: '
+                         + passenger.getPassenger().getPassNumber()
+                         + ' (' + #temporals.format(passenger.getPassenger().getPassExpirationDate(), 'MM/yy') + ')'}">
+                    </div>
                     <div class="description">
                         <div class="ui list">
                             <div class="item">
-                                <div class="header">Street And Number</div>
-                                Home Street 1
+                                <div class="header">Birth Date</div>
+                                <div th:text="${#temporals.format(passenger.getPassenger().getBirthday(), 'yyyy-MM-dd')}"></div>
                             </div>
                             <div class="item">
-                                <div class="header">City</div>
-                                Munich
+                                <div class="header">Street And Number</div>
+                                <div th:text="${passenger.getPassenger().getStreetAndNr()}"></div>
                             </div>
                             <div class="item">
                                 <div class="header">Country</div>
-                                Germany
+                                <div th:text="${passenger.getPassenger().getAreaCode()}"></div>
+                            </div>
+                            <div class="item">
+                                <div class="header">City</div>
+                                <div th:text="${passenger.getPassenger().getCity()}"></div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Country</div>
+                                <div th:text="${passenger.getPassenger().getCountry()}"></div>
+                            </div>
+                            <div class="item">
+                                <div class="header">E-Mail</div>
+                                <div th:text="${passenger.getPassenger().getEmail()}"></div>
+                            </div>
+                            <div class="item">
+                                <div class="header">Mobile Nr.</div>
+                                <div th:text="${passenger.getPassenger().getMobileNumber()}"></div>
                             </div>
                         </div>
                     </div>

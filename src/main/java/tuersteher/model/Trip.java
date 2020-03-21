@@ -25,6 +25,14 @@ public class Trip {
     @OneToMany(targetEntity = PassengerTrip.class, fetch = FetchType.EAGER)
     private List<PassengerTrip> passengers;
 
+    @NotNull
+    @NotEmpty
+    private String reason;
+
+    @NotNull
+    @NotEmpty
+    private String destination;
+
     private Instant date = Instant.now();
 
     public boolean isOk() {
@@ -67,5 +75,21 @@ public class Trip {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 }
