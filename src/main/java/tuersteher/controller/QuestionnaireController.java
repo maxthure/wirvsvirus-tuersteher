@@ -30,7 +30,7 @@ public class QuestionnaireController {
     @PostMapping("/questionnaire")
     String questionnairePost(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
         if (result.hasErrors()) {
-            return "register";
+            return "questionnaire";
         }
         questionnaireService.processQuestionnaire(form);
 
