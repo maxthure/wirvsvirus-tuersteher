@@ -46,24 +46,24 @@
 
         <div class="required field">
             <label for="license_plate" th:text="#{questionnaire.license_plate}">!!!ERROR!!!</label>
-            <input id="license_plate" name="license_plate" th:field="*{license_plate}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('license_plate')}" th:errors="*{license_plate}">
+            <input id="license_plate" name="license_plate" th:field="*{trip.car.license_plate}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('license_plate')}" th:errors="*{trip.car.license_plate}">
                 <p>!!!ERROR!!!</p>
             </div>
         </div>
 
         <div class="required field">
             <label for="reason_for_traveling" th:text="#{questionnaire.reason_for_traveling}">!!!ERROR!!!</label>
-            <input id="reason_for_traveling" name="reason_for_traveling" th:field="*{reason_for_traveling}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('reason_for_traveling')}" th:errors="*{reason_for_traveling}">
+            <input id="reason_for_traveling" name="reason_for_traveling" th:field="*{trip.reason}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('reason_for_traveling')}" th:errors="*{trip.reason}">
                 <p>!!!ERROR!!!</p>
             </div>
         </div>
 
         <div class="required field">
             <label for="travel_destination" th:text="#{questionnaire.travel_destination}">!!!ERROR!!!</label>
-            <input id="travel_destination" name="travel_destination" value="" th:field="*{travel_destination}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('travel_destination')}" th:errors="*{travel_destination}">
+            <input id="travel_destination" name="travel_destination" value="" th:field="*{trip.destination}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('travel_destination')}" th:errors="*{trip.destination}">
                 <p>!!!ERROR!!!</p>
             </div>
         </div>

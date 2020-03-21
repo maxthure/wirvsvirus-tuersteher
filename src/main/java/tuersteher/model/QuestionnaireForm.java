@@ -19,7 +19,15 @@ public class QuestionnaireForm {
     private String reason_for_traveling;
     private String travel_destination;
     private int number_of_passengers;
+    private Car car = new Car();
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
     public String getReason_for_traveling() {
         return reason_for_traveling;
     }

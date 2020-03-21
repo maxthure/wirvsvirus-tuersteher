@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import tuersteher.model.Questionnaire1Form;
 import tuersteher.model.QuestionnaireForm;
 import tuersteher.service.QuestionnaireService;
 
@@ -22,13 +23,13 @@ public class QuestionnaireController {
     }
 
     @GetMapping("/questionnaire")
-    String questionnaireGet(Model model, QuestionnaireForm form) {
+    String questionnaireGet(Model model, Questionnaire1Form form) {
         model.addAttribute("form", form);
         return "questionnaire";
     }
 
     @PostMapping("/questionnaire")
-    String questionnairePost(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
+    String questionnairePost(@Valid @ModelAttribute("form") Questionnaire1Form form, Errors result, Model model) {
         if (result.hasErrors()) {
             return "questionnaire";
         }
