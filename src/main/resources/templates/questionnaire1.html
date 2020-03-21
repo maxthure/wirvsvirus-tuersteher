@@ -70,7 +70,7 @@
 
         <div class="required field">
             <label for="number_of_passengers" th:text="#{questionnaire.number_of_passengers}">!!!ERROR!!!</label>
-            <input id="number_of_passengers" name="number_of_passengers" th:default="1" th:value="1" th:field="*{trip.numberOfPassengers}" th:errorclass="fieldError" type="number" required="required" min="1" max="200"/><br/>
+            <input id="number_of_passengers" name="number_of_passengers" value="1" th:field="*{trip.numberOfPassengers}" th:errorclass="fieldError" type="number" required="required" min="1" max="200"/><br/>
             <div class="ui negative message" th:if="${#fields.hasErrors('trip.numberOfPassengers')}" th:errors="*{trip.numberOfPassengers}">
                 <p>!!!ERROR!!!</p>
             </div>

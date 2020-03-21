@@ -6,11 +6,32 @@ import java.util.List;
 /**
  * @author Thure Nebendahl on 21.03.20
  */
-public class Questionnaire2Form {
+public class QuestionnaireForm {
+    private Trip trip;
+    private Passenger driver;
     private List<Passenger> passengerList;
 
-    public Questionnaire2Form(){
+    public QuestionnaireForm(){
+        trip = new Trip();
+        driver = new Passenger();
+        trip.setCar(new Car());
         passengerList = new ArrayList<>();
+    }
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
+    public Passenger getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Passenger driver) {
+        this.driver = driver;
     }
 
     public void addPassenger(Passenger passenger){
