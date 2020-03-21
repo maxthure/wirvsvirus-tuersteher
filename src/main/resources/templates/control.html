@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+
+    <title th:text="#{control.title}">!!!ERROR!!!</title>
+</head>
+<body>
+<div class="ui container">
+    <header>
+        <h1 th:text="#{control.title}">!!!ERROR!!!</h1>
+    </header>
+
+    <form method="post" role="form" class="ui form" id="form" autocomplete="off" th:action="@{/control(ph=${this})}"
+          th:object="${form}">
+
+        <h3 class="ui dividing header"></h3>
+
+        <label for="plate" th:text="#{control.plate}" class="ui right pointing label"></label>
+        <div class="ui action input" id="plateinput">
+            <input id="plate" th:placeholder="#{control.plate}" th:field="*{plate}">
+            <div class="ui negative message" th:if="${#fields.hasErrors('plate')}" th:errors="*{plate}">
+                <p>Plate must not be empty.</p>
+            </div>
+            <button type="submit" class="ui teal button" th:text="#{control.send}"
+                    onclick="document.getElementById('loading').classList.add('active')">!!!ERROR!!!
+            </button>
+        </div>
+
+    </form>
+
+    <br/>
+    <div th:if="${form.getTrip() != null}" class="ui piled segment">
+        <h2 class="ui header">
+            <i th:class="${form.getTrip().isOk()} ? 'green check icon' : 'red ban icon'"></i>
+            <div class="content"
+                 th:text="${'License Plate: ' + form.getTrip().getCar().getId()}"></div>
+        </h2>
+        <h4 class="ui header">
+            <div class="content"
+                 th:text="${'Registration Date: ' + #temporals.format(form.getTrip().getDate(), 'yyyy-MM-dd')}"></div>
+        </h4>
+        <div class="ui divider"></div>
+        <div class="ui three column grid">
+            <div class="row">
+                <div class="column">
+                    <div class="ui two buttons">
+                        <div th:class="${form.getTrip().isOk()} ? 'ui green button' : 'ui green basic button'">Allow
+                            Entry For All
+                        </div>
+                        <div th:class="${form.getTrip().isOk()} ? 'ui red basic button' : 'ui red button'">Deny Entry
+                            For All
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui divider"></div>
+        <div class="ui cards">
+            <div class="ui link card" th:each="passenger: ${form.getTrip().getPassengers()}">
+                <div class="content">
+                    <div class="header" th:text="${passenger.getName()}"></div>
+                    <div class="meta" th:text="${'Passport ID: '}"></div>
+                    <div class="description">
+                        <div class="ui list">
+                            <div class="item">
+                                <div class="header">Street And Number</div>
+                                Home Street 1
+                            </div>
+                            <div class="item">
+                                <div class="header">City</div>
+                                Munich
+                            </div>
+                            <div class="item">
+                                <div class="header">Country</div>
+                                Germany
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class='ui green basic button'>Allow
+                            Entry
+                        </div>
+                        <div class='ui red basic button'>Deny Entry
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div th:unless="${form.getTrip() != null}">
+        <div class="ui inverted dimmer" id="loading">
+            <div class="ui text loader">Loading</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

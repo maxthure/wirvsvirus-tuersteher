@@ -16,5 +16,5 @@ import java.util.Optional;
 public interface TripRepository extends CrudRepository<Trip, Long> {
     Optional<Trip> getTripById(Long id);
     List<Trip> getTripsByCar(Car car);
-    Optional<Trip> getTripByCarOrderByDateDesc(Car car);
+    Optional<Trip> getFirstTripByCarOrderByDateDesc(Car car);
 }

@@ -35,7 +35,7 @@ public class TripService {
 
     public Trip getTripByCar(String id) {
         Optional<Car> car = carRepository.findById(id);
-        Optional<Trip> foundTrip = car.flatMap(tripRepository::getTripByCarOrderByDateDesc);
+        Optional<Trip> foundTrip = car.flatMap(tripRepository::getFirstTripByCarOrderByDateDesc);
         return foundTrip.orElseThrow(() -> new RuntimeException("Could not find trip!"));
     }
 
