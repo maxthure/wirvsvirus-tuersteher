@@ -67,7 +67,7 @@
         <div class="ui cards">
             <div class="ui link card" th:each="passenger: ${form.getTrip().getPassengers()}">
                 <div class="content">
-                    <div class="header" th:text="${passenger.getName()}"></div>
+                    <div class="header" th:text="${passenger.getPassenger().getName()}"></div>
                     <div class="meta" th:text="${'Passport ID: '}"></div>
                     <div class="description">
                         <div class="ui list">
