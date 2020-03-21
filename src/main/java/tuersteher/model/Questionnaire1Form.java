@@ -11,6 +11,27 @@ public class QuestionnaireForm {
     private String postcode;
     private String city;
     private String country;
+    private String license_plate;
+    private String pass_nr;
+    private String pass_expiry_date;
+
+    public void setLicense_plate(String license_plate) { this.license_plate = license_plate; }
+
+    public String getLicense_plate() {
+        return this.license_plate;
+    }
+
+    public void setPass_nr(String pass_nr) { this.pass_nr = pass_nr; }
+
+    public String getPass_nr() {
+        return this.pass_nr;
+    }
+
+    public void setPass_expiry_date(String pass_expiry_date) { this.pass_expiry_date = pass_expiry_date; }
+
+    public String getPass_expiry_date() {
+        return this.pass_expiry_date;
+    }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;

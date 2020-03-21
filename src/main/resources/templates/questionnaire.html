@@ -67,6 +67,14 @@
         </div>
 
         <div class="required field">
+            <label for="gender" th:text="#{questionnaire.gender}">!!!ERROR!!!</label>
+            <input id="gender" name="gender" th:field="*{gender}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">
+                <p>Gender must not be empty.</p>
+            </div>
+        </div>
+
+        <div class="required field">
             <label for="street" th:text="#{questionnaire.street}">!!!ERROR!!!</label>
             <input id="street" name="street" th:field="*{street}" th:errorclass="fieldError" type="text" required="required"/><br/>
             <div class="ui negative message" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">
@@ -87,6 +95,30 @@
             <input id="city" name="city" value="" th:field="*{city}" th:errorclass="fieldError" type="text" required="required"/><br/>
             <div class="ui negative message" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">
                 <p>City must not be empty.</p>
+            </div>
+        </div>
+
+        <div class="required field">
+            <label for="license_plate" th:text="#{questionnaire.license_plate}">!!!ERROR!!!</label>
+            <input id="license_plate" name="license_plate" th:field="*{license_plate}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('license_plate')}" th:errors="*{license_plate}">
+                <p>License plate must not be empty.</p>
+            </div>
+        </div>
+
+        <div class="required field">
+            <label for="pass_visa_nr" th:text="#{questionnaire.pass_visa_nr}">!!!ERROR!!!</label>
+            <input id="pass_visa_nr" name="pass_visa_nr" th:field="*{pass_visa_nr}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('pass_visa_nr')}" th:errors="*{pass_visa_nr}">
+                <p>Pass/Visa-Nr must not be empty.</p>
+            </div>
+        </div>
+
+        <div class="required field">
+            <label for="pass_visa_expiry_date" th:text="#{questionnaire.pass_visa_expiry_date}">!!!ERROR!!!</label>
+            <input id="pass_visa_expiry_date" name="pass_visa_expiry_date" th:field="*{pass_visa_expiry_date}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('pass_visa_expiry_date')}" th:errors="*{pass_visa_expiry_date}">
+                <p>Pass/Visa expiry date must not be empty.</p>
             </div>
         </div>
 
