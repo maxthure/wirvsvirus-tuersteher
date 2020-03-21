@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tuersteher.model.QuestionnaireForm;
+import tuersteher.service.QuestionnaireService;
 
 import javax.validation.Valid;
 
@@ -12,10 +13,12 @@ import javax.validation.Valid;
  * @author Thure Nebendahl on 21.03.20
  */
 @Controller
-public class IndexController {
-    @RequestMapping("/")
-    public String index() {
-        return "index";
+public class QuestionnaireController {
+
+    private final QuestionnaireService questionnaireService;
+
+    public QuestionnaireController(QuestionnaireService questionnaireService) {
+        this.questionnaireService = questionnaireService;
     }
 
     @GetMapping("/questionnaire")
@@ -29,6 +32,7 @@ public class IndexController {
         if (result.hasErrors()) {
             return "register";
         }
+        questionnaireService.processQuestionnaire(form);
 
         return "redirect:/";
     }
