@@ -33,6 +33,9 @@ public class Trip {
     @NotEmpty
     private String destination;
 
+    @Transient
+    private int numberOfPassengers;
+
     private Instant date = Instant.now();
 
     public boolean isOk() {
@@ -91,5 +94,13 @@ public class Trip {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public int getNumberOfPassengers() {
+        return numberOfPassengers;
+    }
+
+    public void setNumberOfPassengers(int numberOfPassengers) {
+        this.numberOfPassengers = numberOfPassengers;
     }
 }
