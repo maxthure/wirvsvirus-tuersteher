@@ -61,6 +61,21 @@ public class TripService {
         return tripRepository.save(toSave);
     }
 
+    public boolean isTripOk(Trip trip) {
+        if (!trip.isOk()) {
+            System.out.println("!");
+            return false;
+        }
+        for (PassengerTrip pt : trip.getPassengers()) {
+            Passenger passenger = pt.getPassenger();
+            //TODO remove println
+            System.out.println(passenger.getPassExpirationDate());
+            System.out.println(passenger.getVisaExpirationDate());
+            System.out.println(passenger.getVisitedHighRiskCountry());
+        }
+        return true;
+    }
+
     private Car getOrSaveCar(Car provided) {
         return carRepository.save(provided);
     }

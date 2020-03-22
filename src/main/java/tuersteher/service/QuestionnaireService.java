@@ -20,11 +20,15 @@ import java.util.List;
 @Transactional
 @Service
 public class QuestionnaireService {
-    HashSet<String> visaCountries;
 
-    public QuestionnaireService() {
+    private TripService tripService;
+    private HashSet<String> visaCountries;
+
+
+    public QuestionnaireService(TripService tripService) {
         visaCountries = new HashSet<>();
         prepareVisaCountries(visaCountries);
+        this.tripService = tripService;
     }
 
     public void prepareVisaCountries(HashSet<String> visaCountries) {
@@ -57,10 +61,12 @@ public class QuestionnaireService {
     }
 
     public void processQuestionnaire3(QuestionnaireForm form) {
-        //TODO remove println
-        for (PassengerTrip p : form.getTrip().getPassengers()) {
-            System.out.println(p.getPassenger().getVisitedHighRiskCountry());
-        }
+
+    }
+
+    public void processQuestionnaireEnd(QuestionnaireForm form){
+        Trip trip = tripService.createTrip(form.getTrip());
+        tripService.createTrip(trip);
     }
 
     public List<Passenger> visaPassengers(List<PassengerTrip> passengers) {

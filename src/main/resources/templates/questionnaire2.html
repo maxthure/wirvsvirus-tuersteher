@@ -70,7 +70,8 @@
                             return ret;
                         }
                     },
-                    type: 'date'
+                    type: 'date',
+                    maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
                 });
                 $('#pass_expiry_date_calendar'+i).calendar({
                     firstDayOfWeek: 1,

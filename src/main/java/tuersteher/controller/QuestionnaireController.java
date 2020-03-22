@@ -37,6 +37,7 @@ public class QuestionnaireController {
 
     @GetMapping("/questionnaire1")
     String questionnaire1Get(Model model, @ModelAttribute("form") QuestionnaireForm form) {
+        form = form();
         form.setHighRiskCountries(riskAreaService.getRiskAreas());
         model.addAttribute("form", form);
         return "questionnaire1";
@@ -45,6 +46,7 @@ public class QuestionnaireController {
     @PostMapping("/questionnaire1")
     RedirectView questionnaire1Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
+            attributes.addFlashAttribute("form", form);
             return new RedirectView("/questionnaire1");
         }
         questionnaireService.processQuestionnaire1(form);
@@ -61,8 +63,8 @@ public class QuestionnaireController {
             attributes.addFlashAttribute("form", form);
             return new RedirectView("/questionnaire3");
         }
-        //TODO redirect to result
-        return new RedirectView("/");
+        attributes.addFlashAttribute("form", form);
+        return new RedirectView("/questionnaireend");
     }
 
     @GetMapping("/questionnaire2")
@@ -74,6 +76,7 @@ public class QuestionnaireController {
     @PostMapping("/questionnaire2")
     RedirectView questionnaire2Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result,  RedirectAttributes attributes) {
         if (result.hasErrors()) {
+            attributes.addFlashAttribute("form", form);
             return new RedirectView("/questionnaire2");
         }
         questionnaireService.processQuestionnaire2(form);
@@ -83,8 +86,8 @@ public class QuestionnaireController {
             attributes.addFlashAttribute("form", form);
             return new RedirectView("/questionnaire3");
         }
-        //TODO redirect to result
-        return new RedirectView("/");
+        attributes.addFlashAttribute("form", form);
+        return new RedirectView("/questionnaireend");
     }
 
     @GetMapping("/questionnaire3")
@@ -94,12 +97,19 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/questionnaire3")
-    String questionnaire3Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
+    RedirectView questionnaire3Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            return "questionnaire3";
+            attributes.addFlashAttribute("form", form);
+            return new RedirectView("/questionnaire3");
         }
         questionnaireService.processQuestionnaire3(form);
-        //TODO redirect to result
+        attributes.addFlashAttribute("form", form);
+        return new RedirectView("redirect:/questionnaireend");
+    }
+
+    @GetMapping("/questionnaireend")
+    String questionnaireEndGet(Model model, @ModelAttribute("form") QuestionnaireForm form){
+        questionnaireService.processQuestionnaireEnd(form);
         return "redirect:/";
     }
 
