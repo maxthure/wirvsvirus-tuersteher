@@ -182,4 +182,8 @@ public class Passenger {
     public boolean getVisitedHighRiskCountry() {
         return visitedHighRiskCountry;
     }
+
+    public void setVisitedHighRiskCountry(boolean visitedHighRiskCountry) {
+        this.visitedHighRiskCountry = visitedHighRiskCountry;
+    }
 }

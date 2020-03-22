@@ -41,7 +41,6 @@ public class QuestionnaireController {
     @PostMapping("/questionnaire1")
     RedirectView questionnaire1Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            System.out.println(result);
             return new RedirectView("/questionnaire1");
         }
         questionnaireService.processQuestionnaire1(form);

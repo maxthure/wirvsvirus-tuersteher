@@ -757,14 +757,10 @@
                 <div th:each="country : *{highRiskCountries}">
                     <p th:text="${#strings.toString(country)}"></p>
                 </div>
-                <div class="ui checkbox">
-                    <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry" value="false"
-                           th:field="*{passengerList[__${itemStat.index}__].mobileNumber}">
-                    <label for="visitedHighRiskCountry"
-                           th:text="#{questionnaire.notVisitedHighRiskCountry}">!!!ERROR!!!</label>
-                    <input type="hidden" name="visitedHighRiskCountry" value="true"
-                           th:field="*{passengerList[__${itemStat.index}__].visitedHighRiskCountry}">
-                </div>
+                <select class="ui dropdown" id="visitedHighRiskCountry" th:field="*{driver.visitedHighRiskCountry}">
+                    <option th:text=" #{general.no}" value="false">!!!ERROR!!!</option>
+                    <option th:text="#{general.yes}" value="true">!!!ERROR!!!</option>
+                </select>
             </div>
 
             <p></p>

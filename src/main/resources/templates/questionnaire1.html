@@ -12,7 +12,8 @@
     <script th:src="@{/webjars/semantic-ui-calendar/dist/calendar.min.js}"
             src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
     <link th:href="@{/webjars/semantic-ui-calendar/dist/calendar.min.css}"
-          href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+          href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+          rel="stylesheet" type="text/css"/>
 
 
     <script th:inline="javascript">
@@ -55,11 +56,11 @@
                         var day = date.getDate();
                         var month = date.getMonth() + 1;
                         var year = date.getFullYear();
-                        if(month.toString().length < 2){
-                            month = '0'+month
+                        if (month.toString().length < 2) {
+                            month = '0' + month
                         }
-                        if(day.toString().length < 2){
-                            day = '0'+day
+                        if (day.toString().length < 2) {
+                            day = '0' + day
                         }
                         var date_of_birth = year + '-' + month + '-' + day;
                         var ret = day + '.' + month + '.' + year;
@@ -82,11 +83,11 @@
                         var day = date.getDate();
                         var month = date.getMonth() + 1;
                         var year = date.getFullYear();
-                        if(month.toString().length < 2){
-                            month = '0'+month
+                        if (month.toString().length < 2) {
+                            month = '0' + month
                         }
-                        if(day.toString().length < 2){
-                            day = '0'+day
+                        if (day.toString().length < 2) {
+                            day = '0' + day
                         }
                         var pass_expiry_date = year + '-' + month + '-' + day;
                         var ret = day + '.' + month + '.' + year;
@@ -188,8 +189,10 @@
                     <input type="text" th:placeholder="#{questionnaire.date_of_birth}" required="required">
                 </div>
             </div>
-            <input hidden id="date_of_birth" name="date_of_birthday" th:field="*{driver.birthday}" type="date" required="required"/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('driver.birthday')}" th:errors="*{driver.birthday}">
+            <input hidden id="date_of_birth" name="date_of_birthday" th:field="*{driver.birthday}" type="date"
+                   required="required"/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('driver.birthday')}"
+                 th:errors="*{driver.birthday}">
                 <p>!!!ERROR!!!</p>
             </div>
         </div>
@@ -212,7 +215,8 @@
                     <input type="text" th:placeholder="#{questionnaire.pass_expiry_date}" required="required">
                 </div>
             </div>
-            <input hidden id="pass_expiry_date" name="pass_expiry_date" type="date" th:field="*{driver.passExpirationDate}"/>
+            <input hidden id="pass_expiry_date" name="pass_expiry_date" type="date"
+                   th:field="*{driver.passExpirationDate}"/>
             <div class="ui negative message" th:if="${#fields.hasErrors('driver.passExpirationDate')}"
                  th:errors="*{driver.passExpirationDate}">
                 <p>!!!ERROR!!!</p>
@@ -767,17 +771,16 @@
             </div>
         </div>
 
-        <div class="field" th:field="*{driver.visitedHighRiskCountry}">
+
+        <div class="field">
             <label for="visitedHighRiskCountry" th:text="#{questionnaire.visitedHighRiskCountry}">!!!ERROR!!!</label>
             <div th:each="country : *{highRiskCountries}">
                 <p th:text="${#strings.toString(country)}"></p>
             </div>
-            <div class="ui checkbox">
-                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry" value="true">
-                <label for="visitedHighRiskCountry"
-                       th:text="#{questionnaire.notVisitedHighRiskCountry}">!!!ERROR!!!</label>
-                <input type="hidden" name="visitedHighRiskCountry" value="true">
-            </div>
+            <select class="ui dropdown" id="visitedHighRiskCountry" th:field="*{driver.visitedHighRiskCountry}">
+                <option th:text=" #{general.no}" value="false">!!!ERROR!!!</option>
+                <option th:text="#{general.yes}" value="true">!!!ERROR!!!</option>
+            </select>
         </div>
 
         <button type="submit" class="ui button" th:text="#{questionnaire.send}">!!!ERROR!!!</button>

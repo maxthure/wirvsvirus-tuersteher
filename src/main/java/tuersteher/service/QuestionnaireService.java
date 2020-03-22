@@ -46,9 +46,6 @@ public class QuestionnaireService {
         Passenger passenger = form.getDriver();
         Trip trip = form.getTrip();
         trip.addPassenger(passenger);
-        for (PassengerTrip p : form.getTrip().getPassengers()) {
-            System.out.println(p.getPassenger().getVisitedHighRiskCountry());
-        }
     }
 
     public void processQuestionnaire2(QuestionnaireForm form) {
