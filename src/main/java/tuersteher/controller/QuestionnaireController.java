@@ -104,7 +104,7 @@ public class QuestionnaireController {
         }
         questionnaireService.processQuestionnaire3(form);
         attributes.addFlashAttribute("form", form);
-        return new RedirectView("redirect:/questionnaireend");
+        return new RedirectView("/questionnaireend");
     }
 
     @GetMapping("/questionnaireend")
@@ -112,7 +112,7 @@ public class QuestionnaireController {
         if (questionnaireService.processQuestionnaireEnd(form)){
             return "EinreiseErlaubt";
         }
-        return "Einreiseverboten";
+        return "EinreiseVerboten";
     }
 
 }
