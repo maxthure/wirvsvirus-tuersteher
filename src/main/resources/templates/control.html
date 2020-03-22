@@ -55,12 +55,12 @@
             <div class="row">
                 <div class="column">
                     <div class="ui two buttons">
-                        <div th:class="${form.getTrip().isOk()} ? 'ui green button' : 'ui green basic button'">Allow
-                            Entry For All
-                        </div>
-                        <div th:class="${form.getTrip().isOk()} ? 'ui red basic button' : 'ui red button'">Deny Entry
-                            For All
-                        </div>
+                        <form method="post" th:action="@{/control/allow/(ph=${this})}" th:object="${form}">
+                            <button type="submit" class='ui green button'>Allow Entry For All</button>
+                        </form>
+                        <form method="post" th:action="@{/control/deny/(ph=${this})}" th:object="${form}">
+                            <button type="submit" class='ui red button'>Deny Entry For All</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -75,13 +75,13 @@
                     <div class="meta"
                          th:text="${'Passport ID: '
                          + passenger.getPassenger().getPassNumber()
-                         + ' (' + #temporals.format(passenger.getPassenger().getPassExpirationDate(), 'MM/yy') + ')'}">
+                         + ' (' + passenger.getPassenger().getPassExpirationDate() + ')'}">
                     </div>
                     <div class="description">
                         <div class="ui list">
                             <div class="item">
                                 <div class="header">Birth Date</div>
-                                <div th:text="${#temporals.format(passenger.getPassenger().getBirthday(), 'yyyy-MM-dd')}"></div>
+                                <div th:text="${passenger.getPassenger().getBirthday()}"></div>
                             </div>
                             <div class="item">
                                 <div class="header">Street And Number</div>
@@ -111,12 +111,16 @@
                     </div>
                 </div>
                 <div class="extra content">
-                    <div class="ui two buttons">
-                        <div class='ui green basic button'>Allow
-                            Entry
-                        </div>
-                        <div class='ui red basic button'>Deny Entry
-                        </div>
+                    <div th:if="${passenger.getTripStatus() == T(tuersteher.model.TripStatus).TENTATIVE}" class="ui two buttons">
+                        <form method="post" th:action="@{/control/allow/{id}(ph=${this}, id=${passenger.getId()})}" th:object="${form}">
+                            <button th:value="${passenger}" type="submit" class='ui green basic button'>Allow Entry</button>
+                        </form>
+                        <form method="post" th:action="@{/control/deny/{id}(ph=${this}, id=${passenger.getId()})}" th:object="${form}">
+                        <button th:value="${passenger}" type="submit" class='ui red basic button'>Deny Entry</button>
+                        </form>
+                    </div>
+                    <div th:unless="${passenger.getTripStatus() == T(tuersteher.model.TripStatus).TENTATIVE}" class="ui right floated">
+                        <i th:class="${passenger.getTripStatus() == T(tuersteher.model.TripStatus).ACCEPTED} ? 'green check icon' : 'red ban icon'"></i>
                     </div>
                 </div>
             </div>
