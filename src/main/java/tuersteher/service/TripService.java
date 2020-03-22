@@ -77,7 +77,9 @@ public class TripService {
     }
 
     private Car getOrSaveCar(Car provided) {
-        return carRepository.save(provided);
+        provided.setId(provided.getLicense_plate());
+        Car car = carRepository.findById(provided.getId()).orElse(provided);
+        return carRepository.save(car);
     }
 
     private PassengerTrip getOrSavePassengerTrip(PassengerTrip passengerTrip) {

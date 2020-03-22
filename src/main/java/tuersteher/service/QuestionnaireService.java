@@ -66,7 +66,6 @@ public class QuestionnaireService {
 
     public void processQuestionnaireEnd(QuestionnaireForm form){
         Trip trip = tripService.createTrip(form.getTrip());
-        tripService.createTrip(trip);
     }
 
     public List<Passenger> visaPassengers(List<PassengerTrip> passengers) {
