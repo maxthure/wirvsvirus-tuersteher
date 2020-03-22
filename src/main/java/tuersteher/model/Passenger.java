@@ -55,11 +55,13 @@ public class Passenger {
     @NotNull
     private String mobileNumber;
 
-    //TODO Annotationen (sind beide jedoch optional)
+    //TODO Annotationen
     private String visaNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private Instant visaExpirationDate;
+
+    private boolean visitedHighRiskCountry;
 
     public Long getId() {
         return id;
@@ -171,5 +173,9 @@ public class Passenger {
 
     public void setVisaExpirationDate(Instant visaExpirationDate) {
         this.visaExpirationDate = visaExpirationDate;
+    }
+
+    public boolean getVisitedHighRiskCountry() {
+        return visitedHighRiskCountry;
     }
 }
