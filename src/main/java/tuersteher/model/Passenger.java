@@ -1,6 +1,9 @@
 package tuersteher.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * @author Robert Rabe on 21.03.20.
@@ -25,12 +29,14 @@ public class Passenger {
     @NotEmpty
     private String lastName;
     @NotNull
-    private Instant birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+    private LocalDate birthday;
     @NotNull
     @NotEmpty
     private String passNumber;
     @NotNull
-    private Instant passExpirationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+    private LocalDate passExpirationDate;
     @NotNull
     @NotEmpty
     private String streetAndNr;
@@ -52,6 +58,7 @@ public class Passenger {
     //TODO Annotationen
     private String visaNumber;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private Instant visaExpirationDate;
 
     private boolean visitedHighRiskCountry;
@@ -80,11 +87,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public Instant getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Instant birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -96,11 +103,11 @@ public class Passenger {
         this.passNumber = passNumber;
     }
 
-    public Instant getPassExpirationDate() {
+    public LocalDate getPassExpirationDate() {
         return passExpirationDate;
     }
 
-    public void setPassExpirationDate(Instant passExpirationDate) {
+    public void setPassExpirationDate(LocalDate passExpirationDate) {
         this.passExpirationDate = passExpirationDate;
     }
 
