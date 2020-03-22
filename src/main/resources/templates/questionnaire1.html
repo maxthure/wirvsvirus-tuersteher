@@ -773,12 +773,11 @@
                 <p th:text="${#strings.toString(country)}"></p>
             </div>
             <div class="ui checkbox">
-                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry" value="false"
-                       th:field="*{driver.visitedHighRiskCountry}">
+                <input type="hidden" name="visitedHighRiskCountry" value="true">
+                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry"
+                       th:value="*{driver.visitedHighRiskCountry}">
                 <label for="visitedHighRiskCountry"
                        th:text="#{questionnaire.notVisitedHighRiskCountry}">!!!ERROR!!!</label>
-                <input type="hidden" name="visitedHighRiskCountry" value="true"
-                       th:field="*{driver.visitedHighRiskCountry}">
             </div>
         </div>
 

@@ -85,7 +85,7 @@
             <h3 th:text="#{questionnaire.visa_information}">!!!ERROR!!!</h3>
             <h4 th:text="${passenger.getFirstName()} +' '+ ${passenger.getLastName()}"></h4>
 
-            <input hidden id="firstname" name="firstname" value="" th:value="${passenger.getFirstName()}"/>
+            <input hidden id="firstname" name="firstname" th:value="${passenger.getFirstName()}"/>
             <input hidden id="lastname" name="lastname" th:value="${passenger.getLastName()}"/>
             <input hidden id="date_of_birth" name="lastname" th:value="${passenger.getBirthday()}"/>
             <input hidden id="pass_nr" name="pass_nr" th:value="${passenger.getPassNumber()}"/>
