@@ -21,10 +21,6 @@ public class QuestionnaireForm {
         passengerList = new ArrayList<>();
         visaPassengers = new ArrayList<>();
         highRiskCountries = new ArrayList<>();
-        highRiskCountries.add("Test1");
-        highRiskCountries.add("Test2");
-        highRiskCountries.add("Test3");
-        highRiskCountries.add("Test4");
     }
 
     public List<String> getHighRiskCountries() {

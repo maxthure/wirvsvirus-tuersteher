@@ -10,6 +10,7 @@ import tuersteher.model.Passenger;
 import tuersteher.model.PassengerTrip;
 import tuersteher.model.QuestionnaireForm;
 import tuersteher.service.QuestionnaireService;
+import tuersteher.service.RiskAreaService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,9 +23,11 @@ import java.util.List;
 public class QuestionnaireController {
 
     private final QuestionnaireService questionnaireService;
+    private final RiskAreaService riskAreaService;
 
-    public QuestionnaireController(QuestionnaireService questionnaireService) {
+    public QuestionnaireController(QuestionnaireService questionnaireService, RiskAreaService riskAreaService) {
         this.questionnaireService = questionnaireService;
+        this.riskAreaService = riskAreaService;
     }
 
     @ModelAttribute("form")
@@ -34,6 +37,7 @@ public class QuestionnaireController {
 
     @GetMapping("/questionnaire1")
     String questionnaire1Get(Model model, @ModelAttribute("form") QuestionnaireForm form) {
+        form.setHighRiskCountries(riskAreaService.getRiskAreas());
         model.addAttribute("form", form);
         return "questionnaire1";
     }
