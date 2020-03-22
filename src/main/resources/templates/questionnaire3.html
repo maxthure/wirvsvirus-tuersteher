@@ -51,7 +51,7 @@
                             if(day.toString().length < 2){
                                 day = '0'+day
                             }
-                            var visaExpirationDate = year + '-' + month + '-' + day + 'T00:00:00Z';
+                            var visaExpirationDate = year + '-' + month + '-' + day;
                             var ret = day + '.' + month + '.' + year;
                             document.getElementById('visaExpirationDate'+i).value = visaExpirationDate;
                             return ret;

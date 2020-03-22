@@ -61,7 +61,7 @@
                         if(day.toString().length < 2){
                             day = '0'+day
                         }
-                        var date_of_birth = year + '-' + month + '-' + day + 'T00:00:00Z';
+                        var date_of_birth = year + '-' + month + '-' + day;
                         var ret = day + '.' + month + '.' + year;
                         document.getElementById('date_of_birth').value = date_of_birth;
                         return ret;
@@ -88,7 +88,7 @@
                         if(day.toString().length < 2){
                             day = '0'+day
                         }
-                        var pass_expiry_date = year + '-' + month + '-' + day + 'T00:00:00Z';
+                        var pass_expiry_date = year + '-' + month + '-' + day;
                         var ret = day + '.' + month + '.' + year;
                         document.getElementById('pass_expiry_date').value = pass_expiry_date;
                         return ret;
@@ -767,17 +767,16 @@
             </div>
         </div>
 
-        <div class="field">
+        <div class="field" th:field="*{driver.visitedHighRiskCountry}">
             <label for="visitedHighRiskCountry" th:text="#{questionnaire.visitedHighRiskCountry}">!!!ERROR!!!</label>
             <div th:each="country : *{highRiskCountries}">
                 <p th:text="${#strings.toString(country)}"></p>
             </div>
             <div class="ui checkbox">
-                <input type="hidden" name="visitedHighRiskCountry" value="true">
-                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry"
-                       th:value="*{driver.visitedHighRiskCountry}">
+                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry" value="true">
                 <label for="visitedHighRiskCountry"
                        th:text="#{questionnaire.notVisitedHighRiskCountry}">!!!ERROR!!!</label>
+                <input type="hidden" name="visitedHighRiskCountry" value="true">
             </div>
         </div>
 

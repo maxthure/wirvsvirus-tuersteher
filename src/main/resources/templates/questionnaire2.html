@@ -64,7 +64,7 @@
                             if (day.toString().length < 2) {
                                 day = '0' + day
                             }
-                            var date_of_birth = year + '-' + month + '-' + day + 'T00:00:00Z';
+                            var date_of_birth = year + '-' + month + '-' + day;
                             var ret = day + '.' + month + '.' + year;
                             document.getElementById('date_of_birth'+i).value = date_of_birth;
                             return ret;
@@ -91,7 +91,7 @@
                             if (day.toString().length < 2) {
                                 day = '0' + day
                             }
-                            var pass_expiry_date = year + '-' + month + '-' + day + 'T00:00:00Z';
+                            var pass_expiry_date = year + '-' + month + '-' + day;
                             var ret = day + '.' + month + '.' + year;
                             document.getElementById('pass_expiry_date'+i).value = pass_expiry_date;
                             return ret;
