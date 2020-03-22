@@ -47,6 +47,7 @@ public class QuestionnaireController {
         }
         else if(!visaPassengers.isEmpty()){
             form.setVisaPassengers(visaPassengers);
+            model.addAttribute("form", form);
             return "questionnaire3";
         }
         //TODO redirect to result
@@ -62,6 +63,7 @@ public class QuestionnaireController {
         List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
         if(!visaPassengers.isEmpty()){
             form.setVisaPassengers(visaPassengers);
+            model.addAttribute("form", form);
             return "questionnaire3";
         }
         //TODO redirect to result
