@@ -15,18 +15,18 @@ import java.net.URISyntaxException;
 @Configuration
 public class MainConfig {
 
-//    @Bean
-//    public DataSource dataSource() throws URISyntaxException {
-//        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-//
-//        String username = dbUri.getUserInfo().split(":")[0];
-//        String password = dbUri.getUserInfo().split(":")[1];
-//        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
-//
-//        DataSourceBuilder builder = DataSourceBuilder.create();
-//        builder.url(dbUrl);
-//        builder.password(password);
-//        builder.username(username);
-//        return builder.build();
-//    }
+    @Bean
+    public DataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
+
+        DataSourceBuilder builder = DataSourceBuilder.create();
+        builder.url(dbUrl);
+        builder.password(password);
+        builder.username(username);
+        return builder.build();
+    }
 }
