@@ -54,6 +54,8 @@ public class TripService {
                 .map(this::getOrSavePassengerTrip)
                 .collect(Collectors.toList()));
 
+        toSave.setReason(trip.getReason());
+        toSave.setDestination(trip.getDestination());
         toSave.setOk(true);
 
         return tripRepository.save(toSave);
