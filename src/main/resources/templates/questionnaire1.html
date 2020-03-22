@@ -9,8 +9,14 @@
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <script th:src="@{/webjars/semantic-ui-calendar/dist/calendar.min.js}"
+            src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+    <link th:href="@{/webjars/semantic-ui-calendar/dist/calendar.min.css}"
+          href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
 
-    <script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
         $(document).ready(function () {
             $('.ui.dropdown').dropdown();
             $('#postcode').keyup(function () {
@@ -25,7 +31,75 @@
                     $('#city').val('');
                 }
             });
+            $('.ui.accordion').accordion();
+            /*[# th:switch="#{general.language.short}"]*/
+            /*[# th:case="'de'"]*/
+            var day = ['S', 'M', 'D', 'M', 'D', 'F', 'S'];
+            var month = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+            /*[/]*/
+            /*[# th:case="*"]*/
+            var day = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            /*[/]*/
+            /*[/]*/
+            var today = new Date();
+            $('#date_of_birth_calendar').calendar({
+                firstDayOfWeek: 1,
+                monthFirst: false,
+                text: {
+                    days: day,
+                    months: month
+                },
+                formatter: {
+                    date: function (date) {
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        if(month.toString().length < 2){
+                            month = '0'+month
+                        }
+                        if(day.toString().length < 2){
+                            day = '0'+day
+                        }
+                        var date_of_birth = year + '-' + month + '-' + day + 'T00:00:00Z';
+                        var ret = day + '.' + month + '.' + year;
+                        document.getElementById('date_of_birth').value = date_of_birth;
+                        return ret;
+                    }
+                },
+                type: 'date'
+            });
+            $('#pass_expiry_date_calendar').calendar({
+                firstDayOfWeek: 1,
+                monthFirst: false,
+                text: {
+                    days: day,
+                    months: month
+                },
+                formatter: {
+                    date: function (date) {
+                        if (!date) return '';
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        if(month.toString().length < 2){
+                            month = '0'+month
+                        }
+                        if(day.toString().length < 2){
+                            day = '0'+day
+                        }
+                        var pass_expiry_date = year + '-' + month + '-' + day + 'T00:00:00Z';
+                        var ret = day + '.' + month + '.' + year;
+                        document.getElementById('pass_expiry_date').value = pass_expiry_date;
+                        return ret;
+                    }
+                },
+                type: 'date',
+                minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            });
         });
+        /*]]>*/
+
     </script>
 
     <title th:text="#{questionnaire.title}">!!!ERROR!!!</title>
@@ -108,10 +182,14 @@
 
         <div class="required field">
             <label for="date_of_birth" th:text="#{questionnaire.date_of_birth}">!!!ERROR!!!</label>
-            <input id="date_of_birth" name="lastname" th:field="*{driver.birthday}" th:errorclass="fieldError"
-                   type="text" required="required"/><br/>
-            <div class="ui negative message" th:if="${#fields.hasErrors('driver.birthday')}"
-                 th:errors="*{driver.birthday}">
+            <div class="ui calendar" id="date_of_birth_calendar">
+                <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" th:placeholder="#{questionnaire.date_of_birth}" required="required">
+                </div>
+            </div>
+            <input hidden id="date_of_birth" name="date_of_birthday" th:field="*{driver.birthday}" type="text" required="required"/>
+            <div class="ui negative message" th:if="${#fields.hasErrors('driver.birthday')}" th:errors="*{driver.birthday}">
                 <p>!!!ERROR!!!</p>
             </div>
         </div>
@@ -128,8 +206,13 @@
 
         <div class="required field">
             <label for="pass_expiry_date" th:text="#{questionnaire.pass_expiry_date}">!!!ERROR!!!</label>
-            <input id="pass_expiry_date" name="pass_expiry_date" th:field="*{driver.passExpirationDate}"
-                   th:errorclass="fieldError" type="text" required="required"/><br/>
+            <div class="ui calendar" id="pass_expiry_date_calendar">
+                <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" th:placeholder="#{questionnaire.pass_expiry_date}" required="required">
+                </div>
+            </div>
+            <input hidden id="pass_expiry_date" name="pass_expiry_date" th:field="*{driver.passExpirationDate}"/>
             <div class="ui negative message" th:if="${#fields.hasErrors('driver.passExpirationDate')}"
                  th:errors="*{driver.passExpirationDate}">
                 <p>!!!ERROR!!!</p>

@@ -25,14 +25,12 @@ public class Passenger {
     @NotEmpty
     private String lastName;
     @NotNull
-    //private Instant birthday;
-    private String birthday;
+    private Instant birthday;
     @NotNull
     @NotEmpty
     private String passNumber;
     @NotNull
-    //private Instant passExpirationDate;
-    private String passExpirationDate;
+    private Instant passExpirationDate;
     @NotNull
     @NotEmpty
     private String streetAndNr;
@@ -54,7 +52,7 @@ public class Passenger {
     //TODO Annotationen (sind beide jedoch optional)
     private String visaNumber;
 
-    private String visaExpirationDate;
+    private Instant visaExpirationDate;
 
     public Long getId() {
         return id;
@@ -80,11 +78,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public Instant getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Instant birthday) {
         this.birthday = birthday;
     }
 
@@ -96,11 +94,11 @@ public class Passenger {
         this.passNumber = passNumber;
     }
 
-    public String getPassExpirationDate() {
+    public Instant getPassExpirationDate() {
         return passExpirationDate;
     }
 
-    public void setPassExpirationDate(String passExpirationDate) {
+    public void setPassExpirationDate(Instant passExpirationDate) {
         this.passExpirationDate = passExpirationDate;
     }
 
@@ -160,11 +158,11 @@ public class Passenger {
         this.visaNumber = visaNumber;
     }
 
-    public String getVisaExpirationDate() {
+    public Instant getVisaExpirationDate() {
         return visaExpirationDate;
     }
 
-    public void setVisaExpirationDate(String visaExpirationDate) {
+    public void setVisaExpirationDate(Instant visaExpirationDate) {
         this.visaExpirationDate = visaExpirationDate;
     }
 }
