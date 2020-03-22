@@ -3,6 +3,7 @@ package tuersteher.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.tomcat.jni.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +31,14 @@ public class Passenger {
     private String lastName;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     @NotNull
     @NotEmpty
     private String passNumber;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate passExpirationDate;
     @NotNull
     @NotEmpty
@@ -59,7 +62,8 @@ public class Passenger {
     private String visaNumber;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
-    private Instant visaExpirationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate visaExpirationDate;
 
     private boolean visitedHighRiskCountry;
 
@@ -167,11 +171,11 @@ public class Passenger {
         this.visaNumber = visaNumber;
     }
 
-    public Instant getVisaExpirationDate() {
+    public LocalDate getVisaExpirationDate() {
         return visaExpirationDate;
     }
 
-    public void setVisaExpirationDate(Instant visaExpirationDate) {
+    public void setVisaExpirationDate(LocalDate visaExpirationDate) {
         this.visaExpirationDate = visaExpirationDate;
     }
 

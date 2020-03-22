@@ -188,7 +188,7 @@
                     <input type="text" th:placeholder="#{questionnaire.date_of_birth}" required="required">
                 </div>
             </div>
-            <input hidden id="date_of_birth" name="date_of_birthday" th:field="*{driver.birthday}" type="text" required="required"/>
+            <input hidden id="date_of_birth" name="date_of_birthday" th:field="*{driver.birthday}" type="date" required="required"/>
             <div class="ui negative message" th:if="${#fields.hasErrors('driver.birthday')}" th:errors="*{driver.birthday}">
                 <p>!!!ERROR!!!</p>
             </div>
@@ -212,7 +212,7 @@
                     <input type="text" th:placeholder="#{questionnaire.pass_expiry_date}" required="required">
                 </div>
             </div>
-            <input hidden id="pass_expiry_date" name="pass_expiry_date" th:field="*{driver.passExpirationDate}"/>
+            <input hidden id="pass_expiry_date" name="pass_expiry_date" type="date" th:field="*{driver.passExpirationDate}"/>
             <div class="ui negative message" th:if="${#fields.hasErrors('driver.passExpirationDate')}"
                  th:errors="*{driver.passExpirationDate}">
                 <p>!!!ERROR!!!</p>

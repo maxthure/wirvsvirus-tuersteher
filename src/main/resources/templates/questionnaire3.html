@@ -121,7 +121,7 @@
                 </div>
                 <input hidden id="visaExpirationDate" th:id="'visaExpirationDate'+${itemStat.index}" name="visaExpirationDate" th:field="*{visaPassengers[__${itemStat.index}__].visaExpirationDate}"/>
                 <div class="ui negative message" th:if="${#fields.hasErrors('visaPassengers[__${itemStat.index}__].visaExpirationDate')}"
-                     th:errors="*{visaPassengers[__${itemStat.index}__].visaExpirationDate}">
+                     th:errors="*{visaPassengers[__${itemStat.index}__].visaExpirationDate}" type="date" required="required">
                     <p>!!!ERROR!!!</p>
                 </div>
             </div>

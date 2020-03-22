@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <input hidden id="date_of_birth" th:id="'date_of_birth'+${itemStat.index}" name="date_of_birthday"
-                       th:field="*{passengerList[__${itemStat.index}__].birthday}" type="text" required="required"/>
+                       th:field="*{passengerList[__${itemStat.index}__].birthday}" type="date" required="required"/>
                 <div class="ui negative message"
                      th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].birthday')}"
                      th:errors="*{passengerList[__${itemStat.index}__].birthday}">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <input hidden id="pass_expiry_date" th:id="'pass_expiry_date'+${itemStat.index}" name="pass_expiry_date"
-                       th:field="*{passengerList[__${itemStat.index}__].passExpirationDate}"/>
+                       th:field="*{passengerList[__${itemStat.index}__].passExpirationDate}" type="date" required="required"/>
                 <div class="ui negative message"
                      th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].passExpirationDate')}"
                      th:errors="*{passengerList[__${itemStat.index}__].passExpirationDate}">
