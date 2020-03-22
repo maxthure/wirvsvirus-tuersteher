@@ -59,7 +59,7 @@ public class QuestionnaireService {
     public void processQuestionnaire3(QuestionnaireForm form) {
         //TODO remove println
         for (PassengerTrip p : form.getTrip().getPassengers()) {
-            System.out.println(p.getPassenger().getVisaNumber());
+            System.out.println(p.getPassenger().getVisitedHighRiskCountry());
         }
     }
 
