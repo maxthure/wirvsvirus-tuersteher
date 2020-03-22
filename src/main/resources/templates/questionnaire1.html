@@ -767,6 +767,21 @@
             </div>
         </div>
 
+        <div class="field">
+            <label for="visitedHighRiskCountry" th:text="#{questionnaire.visitedHighRiskCountry}">!!!ERROR!!!</label>
+            <div th:each="country : *{highRiskCountries}">
+                <p th:text="${#strings.toString(country)}"></p>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" id="visitedHighRiskCountry" name="visitedHighRiskCountry" value="false"
+                       th:field="*{driver.visitedHighRiskCountry}">
+                <label for="visitedHighRiskCountry"
+                       th:text="#{questionnaire.notVisitedHighRiskCountry}">!!!ERROR!!!</label>
+                <input type="hidden" name="visitedHighRiskCountry" value="true"
+                       th:field="*{driver.visitedHighRiskCountry}">
+            </div>
+        </div>
+
         <button type="submit" class="ui button" th:text="#{questionnaire.send}">!!!ERROR!!!</button>
     </form>
 </div>

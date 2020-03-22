@@ -9,8 +9,10 @@ import java.util.List;
 public class QuestionnaireForm {
     private Trip trip;
     private Passenger driver;
+    private int visaPassengersCount;
     private List<Passenger> passengerList;
     private List<Passenger> visaPassengers;
+    private List<String> highRiskCountries;
 
     public QuestionnaireForm(){
         trip = new Trip();
@@ -18,6 +20,19 @@ public class QuestionnaireForm {
         trip.setCar(new Car());
         passengerList = new ArrayList<>();
         visaPassengers = new ArrayList<>();
+        highRiskCountries = new ArrayList<>();
+        highRiskCountries.add("Test1");
+        highRiskCountries.add("Test2");
+        highRiskCountries.add("Test3");
+        highRiskCountries.add("Test4");
+    }
+
+    public List<String> getHighRiskCountries() {
+        return highRiskCountries;
+    }
+
+    public void setHighRiskCountries(List<String> highRiskCountries) {
+        this.highRiskCountries = highRiskCountries;
     }
 
     public List<Passenger> getVisaPassengers() {
@@ -54,5 +69,18 @@ public class QuestionnaireForm {
 
     public void setPassengerList(List<Passenger> passengerList) {
         this.passengerList = passengerList;
+    }
+
+    public int getVisaPassengersCount() {
+        if (visaPassengers != null){
+            visaPassengersCount = visaPassengers.size();
+        } else {
+            visaPassengersCount = 0;
+        }
+        return visaPassengersCount;
+    }
+
+    public void setVisaPassengersCount(int visaPassengersCount) {
+        this.visaPassengersCount = visaPassengersCount;
     }
 }
