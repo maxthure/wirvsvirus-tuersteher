@@ -9,6 +9,7 @@ import tuersteher.repository.PassengerTripRepository;
 import tuersteher.repository.TripRepository;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,9 +70,15 @@ public class TripService {
         for (PassengerTrip pt : trip.getPassengers()) {
             Passenger passenger = pt.getPassenger();
             //TODO remove println
-            System.out.println(passenger.getPassExpirationDate());
-            System.out.println(passenger.getVisaExpirationDate());
-            System.out.println(passenger.getVisitedHighRiskCountry());
+            if(passenger.getVisaExpirationDate() != null){
+                LocalDate date = LocalDate.now();
+                if (passenger.getPassExpirationDate().isBefore(date.plusMonths(3))){
+                    return false;
+                }
+            }
+            if(passenger.getVisitedHighRiskCountry()){
+                return false;
+            }
         }
         return true;
     }
