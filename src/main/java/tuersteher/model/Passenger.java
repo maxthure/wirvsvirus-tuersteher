@@ -51,6 +51,11 @@ public class Passenger {
     @NotNull
     private String mobileNumber;
 
+    //TODO Annotationen (sind beide jedoch optional)
+    private String visaNumber;
+
+    private String visaExpirationDate;
+
     public Long getId() {
         return id;
     }
@@ -145,5 +150,21 @@ public class Passenger {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getVisaNumber() {
+        return visaNumber;
+    }
+
+    public void setVisaNumber(String visaNumber) {
+        this.visaNumber = visaNumber;
+    }
+
+    public String getVisaExpirationDate() {
+        return visaExpirationDate;
+    }
+
+    public void setVisaExpirationDate(String visaExpirationDate) {
+        this.visaExpirationDate = visaExpirationDate;
     }
 }

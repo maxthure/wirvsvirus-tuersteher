@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tuersteher.model.Passenger;
+import tuersteher.model.PassengerTrip;
 import tuersteher.model.QuestionnaireForm;
 import tuersteher.service.QuestionnaireService;
 
@@ -34,10 +35,9 @@ public class QuestionnaireController {
         if (result.hasErrors()) {
             return "questionnaire1";
         }
-        int numberOfPassengers = form.getTrip().getNumberOfPassengers();
-        //TODO Warum returnt getPassengers PassengerTrips?
-        //List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
         questionnaireService.processQuestionnaire1(form);
+        int numberOfPassengers = form.getTrip().getNumberOfPassengers();
+        List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
         if (numberOfPassengers > 1){
             for (int i = 1; i < numberOfPassengers; i++) {
                 form.addPassenger(new Passenger());
@@ -45,8 +45,11 @@ public class QuestionnaireController {
             model.addAttribute("form", form);
             return "questionnaire2";
         }
-
-        //TODO check if redirect to questionnaire3 is necessary else redirect to the end
+        else if(!visaPassengers.isEmpty()){
+            form.setVisaPassengers(visaPassengers);
+            return "questionnaire3";
+        }
+        //TODO redirect to result
         return "redirect:/";
     }
 
@@ -56,8 +59,22 @@ public class QuestionnaireController {
             return "questionnaire2";
         }
         questionnaireService.processQuestionnaire2(form);
+        List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
+        if(!visaPassengers.isEmpty()){
+            form.setVisaPassengers(visaPassengers);
+            return "questionnaire3";
+        }
+        //TODO redirect to result
+        return "redirect:/";
+    }
 
-        //TODO check if redirect to questionnaire3 is necessary else redirect to the end
+    @PostMapping("/questionnaire3")
+    String questionnaire3Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model){
+        if (result.hasErrors()) {
+            return "questionnaire3";
+        }
+        questionnaireService.processQuestionnaire3(form);
+        //TODO redirect to result
         return "redirect:/";
     }
     

@@ -10,12 +10,22 @@ public class QuestionnaireForm {
     private Trip trip;
     private Passenger driver;
     private List<Passenger> passengerList;
+    private List<Passenger> visaPassengers;
 
     public QuestionnaireForm(){
         trip = new Trip();
         driver = new Passenger();
         trip.setCar(new Car());
         passengerList = new ArrayList<>();
+        visaPassengers = new ArrayList<>();
+    }
+
+    public List<Passenger> getVisaPassengers() {
+        return visaPassengers;
+    }
+
+    public void setVisaPassengers(List<Passenger> visaPassengers) {
+        this.visaPassengers = visaPassengers;
     }
 
     public Trip getTrip() {
