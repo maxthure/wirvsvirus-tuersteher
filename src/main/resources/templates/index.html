@@ -17,8 +17,28 @@
     </header>
     <nav th:include="navigation :: navigation"></nav>
 
-    <h2 th:text="index.introtitle"></h2>
-    <p th:text=""></p>
+    <p th:text="#{index.tuerstehertext}"></p>
+
+    <h2 th:text="#{index.introtitle}"></h2>
+    <p th:text="#{index.covid19text}"></p>
+    <ul>
+        <li><a>https://www.zusammengegencorona.de</a></li>
+        <li><a>https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/nCoV.html</a> </li>
+        <li><a>https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a> </li>
+        <li><a>https://www.who.int/news-room/q-a-detail/q-a-coronaviruses</a> </li>
+        <li><a>https://www.ecdc.europa.eu/en</a> </li>
+        <li><a>https://www.infektionsschutz.de/coronavirus/</a></li>
+    </ul>
+    <br/>
+    <h2 th:text="#{index.entrytitle}"></h2>
+    <p th:text="#{index.entrytext}"></p>
+    <ul>
+        <li><a>https://www.bundespolizei.de/Web/DE/04Aktuelles/01Meldungen/2020/03/200317_faq.html</a> </li>
+        <li><a>https://www.auswaertiges-amt.de/de/ReiseUndSicherheit/covid-19/2296762</a></li>
+        <li><a>https://www.bmi.bund.de/SharedDocs/faqs/DE/themen/bevoelkerungsschutz/coronavirus/coronavirus-faqs.html</a></li>
+        <li>Für Pendler: <a>https://www.bundespolizei.de/Web/DE/04Aktuelles/01Meldungen/2020/03/pendlerbescheinigung_down.pdf?__blob=publicationFile&v=2</a></li>
+    </ul>
+    <p th:text="#{index.entrytuersteher}"></p>
 </div>
 </body>
 </html>
