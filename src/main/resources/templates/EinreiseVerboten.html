@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
 </head>
 <body>
-<h1>Ihre Daten wurden übermittelt und geprüft.</h1>
-<h1>Sie dürfen leider nicht einreisen.</h1>
-<h1>Bitte wenden Sie sich an Ihre örtlichen Behörden, um eventuelle Fragen zu klären.</h1>
+<h1 th:text="#{endscreen.niO1}">Ihre Daten wurden übermittelt und geprüft.</h1>
+<h1 th:text="#{endscreen.niO2}">Sie dürfen leider nicht einreisen.</h1>
+<h1 th:text="#{endscreen.niO3}">Bitte wenden Sie sich an Ihre örtlichen Behörden, um eventuelle Fragen zu klären.</h1>
 </body>
 </html>
