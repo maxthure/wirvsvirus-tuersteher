@@ -64,8 +64,9 @@ public class QuestionnaireService {
 
     }
 
-    public void processQuestionnaireEnd(QuestionnaireForm form){
+    public boolean processQuestionnaireEnd(QuestionnaireForm form){
         Trip trip = tripService.createTrip(form.getTrip());
+        return tripService.isTripOk(trip);
     }
 
     public List<Passenger> visaPassengers(List<PassengerTrip> passengers) {

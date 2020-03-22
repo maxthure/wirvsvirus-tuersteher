@@ -109,8 +109,10 @@ public class QuestionnaireController {
 
     @GetMapping("/questionnaireend")
     String questionnaireEndGet(Model model, @ModelAttribute("form") QuestionnaireForm form){
-        questionnaireService.processQuestionnaireEnd(form);
-        return "redirect:/";
+        if (questionnaireService.processQuestionnaireEnd(form)){
+            return "EinreiseErlaubt";
+        }
+        return "Einreiseverboten";
     }
 
 }
