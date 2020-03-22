@@ -62,22 +62,22 @@
 
             <div class="required field">
                 <label for="visaNumber" th:text="#{questionnaire.visaNumber}">!!!ERROR!!!</label>
-                <input id="visaNumber" name="email" th:field="*{passengerList[__${itemStat.index}__].visaNumber}"
+                <input id="visaNumber" name="email" th:field="*{visaPassengers[__${itemStat.index}__].visaNumber}"
                        th:errorclass="fieldError" type="text"/><br/>
                 <div class="ui negative message"
-                     th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].visaNumber')}"
-                     th:errors="*{passengerList[__${itemStat.index}__].visaNumber}">
+                     th:if="${#fields.hasErrors('visaPassengers[__${itemStat.index}__].visaNumber')}"
+                     th:errors="*{visaPassengers[__${itemStat.index}__].visaNumber}">
                     <p>!!!ERROR!!!</p>
                 </div>
             </div>
             <div class="required field">
                 <label for="visaExpirationDate" th:text="#{questionnaire.visaExpDate}">!!!ERROR!!!</label>
                 <input id="visaExpirationDate" name="email"
-                       th:field="*{passengerList[__${itemStat.index}__].visaExpirationDate}" th:errorclass="fieldError"
+                       th:field="*{visaPassengers[__${itemStat.index}__].visaExpirationDate}" th:errorclass="fieldError"
                        type="text"/><br/>
                 <div class="ui negative message"
-                     th:if="${#fields.hasErrors('passengerList[__${itemStat.index}__].visaExpirationDate')}"
-                     th:errors="*{passengerList[__${itemStat.index}__].visaExpirationDate}">
+                     th:if="${#fields.hasErrors('visaPassengers[__${itemStat.index}__].visaExpirationDate')}"
+                     th:errors="*{visaPassengers[__${itemStat.index}__].visaExpirationDate}">
                     <p>!!!ERROR!!!</p>
                 </div>
             </div>

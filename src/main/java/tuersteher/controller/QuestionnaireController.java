@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import tuersteher.model.Passenger;
 import tuersteher.model.PassengerTrip;
 import tuersteher.model.QuestionnaireForm;
@@ -16,6 +18,7 @@ import java.util.List;
  * @author Thure Nebendahl on 21.03.20
  */
 @Controller
+@SessionAttributes("form")
 public class QuestionnaireController {
 
     private final QuestionnaireService questionnaireService;
@@ -24,54 +27,70 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
+    @ModelAttribute("form")
+    public QuestionnaireForm form() {
+        return new QuestionnaireForm();
+    }
+
     @GetMapping("/questionnaire1")
-    String questionnaire1Get(Model model, QuestionnaireForm form) {
+    String questionnaire1Get(Model model, @ModelAttribute("form") QuestionnaireForm form) {
         model.addAttribute("form", form);
         return "questionnaire1";
     }
 
     @PostMapping("/questionnaire1")
-    String questionnaire1Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
+    RedirectView questionnaire1Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            return "questionnaire1";
+            return new RedirectView("/questionnaire1");
         }
         questionnaireService.processQuestionnaire1(form);
         int numberOfPassengers = form.getTrip().getNumberOfPassengers();
         List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
-        if (numberOfPassengers > 1){
+        if (numberOfPassengers > 1) {
             for (int i = 1; i < numberOfPassengers; i++) {
                 form.addPassenger(new Passenger());
             }
-            model.addAttribute("form", form);
-            return "questionnaire2";
-        }
-        else if(!visaPassengers.isEmpty()){
+            attributes.addFlashAttribute("form", form);
+            return new RedirectView("/questionnaire2");
+        } else if (!visaPassengers.isEmpty()) {
             form.setVisaPassengers(visaPassengers);
-            model.addAttribute("form", form);
-            return "questionnaire3";
+            attributes.addFlashAttribute("form", form);
+            return new RedirectView("/questionnaire3");
         }
         //TODO redirect to result
-        return "redirect:/";
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/questionnaire2")
+    String questionnaire2Get(Model model, @ModelAttribute("form") QuestionnaireForm form){
+        model.addAttribute("form",form);
+        return "questionnaire2";
     }
 
     @PostMapping("/questionnaire2")
-    String questionnaire2Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
+    RedirectView questionnaire2Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result,  RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            return "questionnaire2";
+            return new RedirectView("/questionnaire2");
         }
         questionnaireService.processQuestionnaire2(form);
         List<Passenger> visaPassengers = questionnaireService.visaPassengers(form.getTrip().getPassengers());
-        if(!visaPassengers.isEmpty()){
+        if (!visaPassengers.isEmpty()) {
             form.setVisaPassengers(visaPassengers);
-            model.addAttribute("form", form);
-            return "questionnaire3";
+            attributes.addFlashAttribute("form", form);
+            return new RedirectView("/questionnaire3");
         }
         //TODO redirect to result
-        return "redirect:/";
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/questionnaire3")
+    String questionnaire3Get(Model model, @ModelAttribute("form") QuestionnaireForm form){
+        model.addAttribute("form",form);
+        return "questionnaire3";
     }
 
     @PostMapping("/questionnaire3")
-    String questionnaire3Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model){
+    String questionnaire3Post(@Valid @ModelAttribute("form") QuestionnaireForm form, Errors result, Model model) {
         if (result.hasErrors()) {
             return "questionnaire3";
         }
@@ -79,5 +98,5 @@ public class QuestionnaireController {
         //TODO redirect to result
         return "redirect:/";
     }
-    
+
 }
